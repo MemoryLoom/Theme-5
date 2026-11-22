@@ -3,6 +3,7 @@ dist
 dist-single
 dist-ssr
 *.local
+*.tsbuildinfo
 .DS_Store
 .env
 .env.*
