@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
+import { Deepastambham, MayilpeeliFlute } from '../components/decor/Kerala'
 import { WaxSeal } from '../components/decor/WaxSeal'
 import { useCouple, useSite } from '../context/SiteContext'
 import { dateParts } from '../lib/date'
@@ -8,7 +9,7 @@ import { MediaImg } from '../components/ui/MediaImg'
 const IO = [0.65, 0, 0.35, 1] as const
 const OUT = [0.22, 0.8, 0.24, 1] as const
 
-/** Opening screen: an ivory envelope on a dark stage. Tap → seal breaks, flap opens, the card rises. */
+/** Opening screen: Guruvayoor temple deepastambham stage with a kasavu-bordered ivory envelope. */
 export function Landing({ onOpen, onDone }: { onOpen: () => void; onDone: () => void }) {
   const { ready, guestName, config } = useSite()
   const { first, second, mono } = useCouple()
@@ -24,7 +25,7 @@ export function Landing({ onOpen, onDone }: { onOpen: () => void; onDone: () => 
   }
 
   return (
-    <motion.div className="landing" role="button" tabIndex={0} aria-label="Tap to open the invitation"
+    <motion.div className="landing" role="button" tabIndex={0} aria-label="Tap to open the Guruvayoor wedding invitation"
       onClick={open} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), open())}
       exit={{ opacity: 0, transition: { duration: 1, ease: IO } }}>
       {config.backdrops.landing && (
@@ -32,10 +33,22 @@ export function Landing({ onOpen, onDone }: { onOpen: () => void; onDone: () => 
           <MediaImg src={config.backdrops.landing} alt="" loading="eager" />
         </motion.div>
       )}
-      <motion.div className="absolute left-0 right-0 top-[11vh] text-center" initial={{ opacity: 0, y: -10 }} animate={{ opacity: opening ? 0 : 1, y: 0 }} transition={{ duration: 1.1, ease: OUT, delay: opening ? 0 : 0.3 }}>
+
+      {/* Flanking Guruvayoor East Nada Deepastambham lamp pillars */}
+      <motion.div className="pointer-events-none absolute bottom-[12vh] left-[4vw] hidden text-kasavu/55 sm:block md:left-[8vw]"
+        initial={{ opacity: 0, y: 20 }} animate={{ opacity: opening ? 0 : 0.75, y: 0 }} transition={{ duration: 1.4, delay: 0.3 }}>
+        <Deepastambham className="h-[220px] w-[100px] md:h-[270px] md:w-[120px]" />
+      </motion.div>
+      <motion.div className="pointer-events-none absolute bottom-[12vh] right-[4vw] hidden text-kasavu/55 sm:block md:right-[8vw]"
+        initial={{ opacity: 0, y: 20 }} animate={{ opacity: opening ? 0 : 0.75, y: 0 }} transition={{ duration: 1.4, delay: 0.3 }}>
+        <Deepastambham className="h-[220px] w-[100px] md:h-[270px] md:w-[120px]" />
+      </motion.div>
+
+      <motion.div className="absolute left-0 right-0 top-[7vh] px-4 text-center" initial={{ opacity: 0, y: -10 }} animate={{ opacity: opening ? 0 : 1, y: 0 }} transition={{ duration: 1.1, ease: OUT, delay: opening ? 0 : 0.3 }}>
+        <MayilpeeliFlute className="mx-auto mb-1 h-11 w-28" />
         <div className="ml-blessing !text-kasavu">{config.hero.blessingMl}</div>
-        <div className="mt-3 text-[11px] uppercase tracking-[.4em] text-[#E8D9BD]/80">You are invited</div>
-        <div className="serif mt-2 text-[clamp(26px,6vw,36px)] font-light text-[#FFF8E8]">{first.name} <span className="italic text-kasavu">&amp;</span> {second.name}</div>
+        <div className="mt-2.5 text-[10.5px] uppercase tracking-[.38em] text-[#E8D9BD]/85">Sree Guruvayurappan Temple · East Nada</div>
+        <div className="serif mt-1.5 text-[clamp(26px,6vw,36px)] font-light text-[#FFF8E8]">{first.name} <span className="italic text-kasavu">&amp;</span> {second.name}</div>
       </motion.div>
 
       <motion.div className="envelope" initial={{ opacity: 0, y: 40, scale: 0.94 }}
@@ -47,7 +60,7 @@ export function Landing({ onOpen, onDone }: { onOpen: () => void; onDone: () => 
           animate={opening && !reduce ? { y: '-58%' } : { y: '0%' }} transition={{ duration: 1.25, ease: IO, delay: 0.75 }}>
           <div className="ml text-[11px] text-maroon">{config.wedding.auspiciousMl}</div>
           <div className="serif mt-1 text-[clamp(22px,6vw,30px)] font-normal leading-tight text-maroon">{first.name} <i className="text-[#A98243]">&amp;</i> {second.name}</div>
-          <div className="mt-1 text-[11px] tracking-[.3em] text-[#6B5545]">{dp.d} · {dp.m} · 20{dp.y}</div>
+          <div className="mt-1 text-[10.5px] tracking-[.28em] text-[#6B5545]">{dp.d} · {dp.m} · 20{dp.y} · GURUVAYOOR</div>
         </motion.div>
         {/* front pocket of the envelope */}
         <svg className="env-front" viewBox="0 0 142 100" preserveAspectRatio="none" style={{ zIndex: 2 }} aria-hidden="true">
@@ -79,7 +92,7 @@ export function Landing({ onOpen, onDone }: { onOpen: () => void; onDone: () => 
         {guestName && <motion.div className="landing-guest" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.9 }}>Dear {guestName}</motion.div>}
         {ready ? (
           <motion.span initial={{ opacity: 0 }} animate={reduce ? { opacity: 1 } : { opacity: [0.5, 1, 0.5] }} transition={reduce ? { duration: 0.6 } : { duration: 2.6, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}>
-            Tap to open
+            Tap to enter Sree Guruvayurappan Sannidhi
           </motion.span>
         ) : (
           <span className="loader-dots" aria-label="Loading"><span /><span /><span /></span>

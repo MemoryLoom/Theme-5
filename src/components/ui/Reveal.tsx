@@ -1,6 +1,6 @@
 import { motion, useReducedMotion, useScroll, useTransform, type Variants } from 'framer-motion'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Nilavilakku } from '../decor/Kerala'
+import { MayilpeeliFlute, Nilavilakku } from '../decor/Kerala'
 import { MediaImg } from './MediaImg'
 
 /**
@@ -154,6 +154,7 @@ export function Backdrop({ src, sepia, distance = 70, opacity = 1 }: { src?: str
 export function SectionHeading({ eyebrow, title, lede, className = '' }: { eyebrow?: string; title?: string; lede?: string; className?: string }) {
   return (
     <div className={`section-head ${className}`}>
+      <Reveal distance={10} dir="none"><MayilpeeliFlute className="mx-auto mb-2 h-11 w-28" /></Reveal>
       {eyebrow && <Reveal distance={14}><div className="eyebrow">{eyebrow}</div></Reveal>}
       {title && <TextReveal text={title} className="title" delay={0.1} />}
       {lede && <Reveal delay={0.35} distance={18}><p className="lede">{lede}</p></Reveal>}

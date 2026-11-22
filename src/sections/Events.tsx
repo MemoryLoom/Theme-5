@@ -4,7 +4,7 @@ import type { WeddingEvent } from '../config/types'
 import { ICalendar, IClock, INav, IPin } from '../components/ui/Icons'
 import { Backdrop, ImageReveal, SectionHeading, Seam } from '../components/ui/Reveal'
 import { MediaImg } from '../components/ui/MediaImg'
-import { SadyaLeaf } from '../components/decor/Kerala'
+import { MuralCorner, SadyaLeaf, VilakkumadamRow } from '../components/decor/Kerala'
 import { useCouple, useSite } from '../context/SiteContext'
 import { googleCalendarUrl, icsFile, mapsUrl } from '../lib/calendar'
 import { longDate, timeOf, tzOf } from '../lib/date'
@@ -95,6 +95,8 @@ function EventCard({ e, n, couple }: { e: WeddingEvent; n: number; couple: strin
         <a className="btn btn-primary flex-1" href={mapsUrl(e)} target="_blank" rel="noopener noreferrer"><INav />Directions</a>
         <CalendarMenu e={e} couple={couple} />
       </div>
+      <MuralCorner className="pointer-events-none absolute bottom-2 left-2 h-11 w-11 scale-y-[-1] opacity-55" />
+      <MuralCorner className="pointer-events-none absolute bottom-2 right-2 h-11 w-11 scale-[-1] opacity-55" />
     </motion.article>
   )
 }
@@ -110,6 +112,7 @@ export function Events() {
       <Seam />
       <div className="section-inner">
         <SectionHeading eyebrow={ev.eyebrow} title={ev.title} lede={ev.lede} />
+        <VilakkumadamRow className="mx-auto -mt-8 mb-12 h-6 w-[280px] opacity-85" />
         <div className={`mx-auto grid max-w-[560px] gap-6 ${ev.items.length > 1 ? 'md:max-w-[1040px] md:grid-cols-2 md:gap-8' : ''}`}>
           {ev.items.map((e, i) => <EventCard key={e.id} e={e} n={i + 1} couple={names} />)}
         </div>

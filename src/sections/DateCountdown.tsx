@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { memo, useEffect, useState } from 'react'
 import { Backdrop, Parallax, Reveal, RevealItem, Seam, TextReveal } from '../components/ui/Reveal'
+import { Deepastambham, VilakkumadamRow } from '../components/decor/Kerala'
 import { useSite } from '../context/SiteContext'
 import { dateParts, diffParts, longDate, tzOf } from '../lib/date'
 
@@ -50,14 +51,23 @@ export function DateCountdown() {
     <section id="date" className="section tone-maroon overflow-hidden" aria-label="Wedding date and countdown">
       <Backdrop src={config.backdrops.countdown} distance={80} />
       <Seam />
-      {/* slow-drifting concentric rings behind the date */}
+      {/* Sacred Sudarshana / Lotus Mandala rings behind the Muhurtham date */}
       <Parallax className="pointer-events-none absolute left-1/2 top-[6%] -z-10 -translate-x-1/2" distance={70}>
         <svg width="560" height="560" viewBox="0 0 560 560" fill="none" className="h-[min(560px,120vw)] w-[min(560px,120vw)] text-gold" aria-hidden="true">
-          <circle cx="280" cy="280" r="276" stroke="currentColor" strokeOpacity=".12" />
-          <circle cx="280" cy="280" r="220" stroke="currentColor" strokeOpacity=".08" strokeDasharray="2 8" />
-          <circle cx="280" cy="280" r="160" stroke="currentColor" strokeOpacity=".06" />
+          <circle cx="280" cy="280" r="276" stroke="currentColor" strokeOpacity=".15" />
+          <circle cx="280" cy="280" r="220" stroke="currentColor" strokeOpacity=".12" strokeDasharray="3 8" />
+          <circle cx="280" cy="280" r="160" stroke="currentColor" strokeOpacity=".08" />
         </svg>
       </Parallax>
+
+      {/* Flanking Guruvayoor Deepastambham lamp towers */}
+      <div className="pointer-events-none absolute bottom-10 left-[5vw] hidden text-kasavu/50 lg:block" aria-hidden="true">
+        <Deepastambham className="h-[220px] w-[100px]" />
+      </div>
+      <div className="pointer-events-none absolute bottom-10 right-[5vw] hidden text-kasavu/50 lg:block" aria-hidden="true">
+        <Deepastambham className="h-[220px] w-[100px]" />
+      </div>
+
       <div className="section-inner max-w-[860px]">
         <TextReveal as="p" text={w.auspiciousMl} className="ml mb-3 text-[clamp(22px,4.2vw,34px)] !font-semibold text-kasavu" />
         <Reveal distance={14}><div className="eyebrow">{w.dateBarText}</div></Reveal>
@@ -69,7 +79,12 @@ export function DateCountdown() {
           </Reveal>
         </div>
 
-        <div className="mx-auto mt-16 max-w-[640px]">
+        <Reveal delay={0.25} className="mt-6">
+          <p className="ml text-[15px] text-kasavu/95">മുഹൂർത്തം: രാവിലെ 10:45 – 11:30 · കിഴക്കേ നട കല്യാണമണ്ഡപം, ഗുരുവായൂർ</p>
+          <VilakkumadamRow className="mx-auto mt-3 h-6 w-[280px] opacity-85" />
+        </Reveal>
+
+        <div className="mx-auto mt-12 max-w-[640px]">
           {isToday ? (
             <Reveal className="serif py-4 text-[clamp(32px,6vw,48px)] font-light italic text-gold2" scale={0.92}>
               <motion.div animate={{ opacity: [0.75, 1, 0.75] }} transition={{ duration: 3, repeat: Infinity }}>{w.todayMessage}</motion.div>

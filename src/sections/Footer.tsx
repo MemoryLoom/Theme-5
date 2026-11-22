@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Backdrop, Ornament, Reveal, TextReveal } from '../components/ui/Reveal'
-import { Nilavilakku } from '../components/decor/Kerala'
+import { Deepastambham, MayilpeeliFlute, VilakkumadamRow } from '../components/decor/Kerala'
 import { IFacebook, IGlobe, IInstagram, IPause, IPlay, IWhatsapp, IYoutube } from '../components/ui/Icons'
 import { useCouple, useSite } from '../context/SiteContext'
 import { useMusic } from '../music/MusicContext'
@@ -18,14 +18,24 @@ export function Footer() {
     <footer className="footer tone-dark">
       <Backdrop src={config.backdrops.footer} distance={60} />
       <div className="kasavu-band absolute inset-x-0 top-0" aria-hidden="true" />
-            <Reveal dir="none" scale={0.8}><Nilavilakku className="mx-auto mb-6 h-16 w-10 text-kasavu" flames={5} /></Reveal>
+      <Reveal dir="none" scale={0.8}><Deepastambham className="mx-auto mb-5 h-24 w-14 text-kasavu" /></Reveal>
       <Reveal className="serif mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-gold/40 text-[34px] italic text-gold2" scale={0.8} dir="none">
         <span>{mono[0]}</span><span className="mx-0.5 text-[18px] text-gold/80">&amp;</span><span>{mono[1]}</span>
       </Reveal>
-      <Reveal delay={0.1}><p className="ml mt-10 text-[18px] text-kasavu">{config.invitation.inviteMl}</p><p className="mt-2 text-[13px] uppercase tracking-[.3em] text-muted">{f.message}</p></Reveal>
+      <Reveal delay={0.08}>
+        <MayilpeeliFlute className="mx-auto mt-6 h-11 w-28" />
+        <p className="ml mt-2 text-[18px] text-kasavu">ഓം നമോ ഭഗവതേ വാസുദേവായ · ശ്രീ ഗുരുവായൂരപ്പൻ തുണ</p>
+        <p className="mt-2 text-[13px] uppercase tracking-[.3em] text-muted">{f.message}</p>
+      </Reveal>
       <TextReveal as="p" text={`${first.name} *&* ${second.name}`} className="serif mt-4 text-[clamp(44px,9vw,84px)] font-light leading-none text-ivory" delay={0.15} />
-      <Reveal delay={0.3}><p className="mt-5 text-[13px] tracking-[.4em] text-gold2">{dp.d} · {dp.m} · 20{dp.y}</p></Reveal>
-      <Ornament className="my-12" />
+      <Reveal delay={0.3}>
+        <p className="mt-5 text-[13px] tracking-[.4em] text-gold2">{dp.d} · {dp.m} · 20{dp.y}</p>
+        <p className="mt-2 text-[11px] uppercase tracking-[.32em] text-champagne/80">East Nada Kalyana Mandapam · Guruvayoor Sri Krishna Temple</p>
+      </Reveal>
+      <Reveal delay={0.35} className="mt-7">
+        <VilakkumadamRow className="mx-auto h-6 w-[280px] opacity-85" />
+      </Reveal>
+      <Ornament className="my-10" />
       <Reveal delay={0.1} className="flex flex-col items-center gap-8">
         {config.music.enabled && m.track && (
           <motion.button onClick={m.toggle} whileTap={{ scale: 0.96 }} className="btn btn-ghost" aria-label={m.playing ? 'Pause music' : 'Play music'}>
