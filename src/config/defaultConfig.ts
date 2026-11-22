@@ -1,33 +1,29 @@
 import type { SiteConfig } from './types'
 import mangalam from '../assets/music/mangalam.mp3'
 import sandhya from '../assets/music/sandhya.mp3'
-// Demo photography: Unsplash (free licence) — see README for photographer credits.
+// Authentic Guruvayoor Sri Krishna Temple & Kerala Hindu wedding photography
 import bgHero from '../assets/photos/bg-hero.webp'
-import bgInvite from '../assets/photos/bg-invite.webp'
-import bgEvents from '../assets/photos/bg-events.webp'
-import bgCountdown from '../assets/photos/bg-countdown.webp'
-import bgFooter from '../assets/photos/bg-footer.webp'
 import bgLanding from '../assets/photos/bg-landing.webp'
+import bgFooter from '../assets/photos/bg-footer.webp'
 import decoJasmine from '../assets/photos/deco-jasmine.webp'
 import pStory from '../assets/photos/story.webp'
 import pGroom from '../assets/photos/groom.webp'
 import pBride from '../assets/photos/bride.webp'
 import pThalikettu from '../assets/photos/ev-thalikettu.webp'
-import pReception from '../assets/photos/ev-reception.webp'
 import gWalk from '../assets/photos/g-walk.webp'
-import gSitting from '../assets/photos/g-sitting.webp'
-import gKasavu from '../assets/photos/g-kasavu.webp'
 import gFamily from '../assets/photos/g-family.webp'
 import gLampJasmine from '../assets/photos/g-lampjasmine.webp'
-import gTemple from '../assets/photos/g-temple.webp'
-import gKodimaram from '../assets/photos/g-kodimaram.webp'
+import guruvayoorTopview from '../assets/photos/guruvayoor-topview.jpg'
+import guruvayoorEastnada from '../assets/photos/guruvayoor-eastnada.jpg'
+import guruvayoorSreekovil from '../assets/photos/guruvayoor-sreekovil.jpg'
+import guruvayoorKrishnanattam from '../assets/photos/guruvayoor-krishnanattam.jpg'
 
 /** Bump when the template's content model changes; older saved configs are then ignored. */
-export const CONFIG_VERSION = 6
+export const CONFIG_VERSION = 7
 
 /**
- * GURUVAYOOR TEMPLE WEDDING THEME — every name and address below is sample content
- * crafted around a sacred wedding at Guruvayoor Sri Krishna Temple.
+ * GURUVAYOOR SRI KRISHNA TEMPLE WEDDING THEME — authentic Guruvayoor temple imagery,
+ * East Nada Kalyana Mandapam ceremonies, and sacred Malayalam invocations.
  */
 export const defaultConfig: SiteConfig = {
   version: CONFIG_VERSION,
@@ -38,27 +34,27 @@ export const defaultConfig: SiteConfig = {
   },
   backdrops: {
     landing: bgLanding,
-    invitation: bgInvite,
-    countdown: bgCountdown,
-    events: bgEvents,
+    invitation: guruvayoorTopview,
+    countdown: guruvayoorSreekovil,
+    events: guruvayoorEastnada,
     gallery: decoJasmine,
     footer: bgFooter,
   },
   hero: {
     eyebrow: 'Sree Guruvayurappan Thuna · The Wedding Of',
-    blessingMl: 'ഓം നമോ ഭഗവതേ വാസുദേവായ · ശ്രീ ഗുരുവായൂരപ്പന്റെ തിരുസന്നിധിയിൽ',
+    blessingMl: 'ഓം നമോ ഭഗവതേ വാസുദേവായ · ശ്രീ ഗുരുവായൂരപ്പൻ തുണ',
     tagline: 'Before the sacred Deepastambham and golden Kodimaram of Bhooloka Vaikuntam, two souls unite as one.',
     venueLine: 'Sree Guruvayurappan Temple · East Nada, Guruvayoor',
     image: bgHero,
   },
   invitation: {
-    eyebrow: 'Thirumangalya Kshanam · Sacred Invitation',
+    eyebrow: 'Thirumangalya Kshanam · Sacred Scroll',
     inviteMl: 'ഗുരുവായൂരപ്പന്റെ തിരുസന്നിധിയിലേക്ക് സ്നേഹപൂർവ്വം ക്ഷണിക്കുന്നു',
     lead: 'With the divine grace of Lord Sree Guruvayurappan and the blessings of our revered elders,',
     hosts: ['Mr. Rajesh Nair & Mrs. Lakshmi Nair', 'Mr. Suresh Menon & Mrs. Anitha Menon'],
     hostsJoiner: 'together with',
     request: 'humbly seek your auspicious presence and prayers\nat the Thirumangalyam (Thalikettu) of our children',
-    withWord: 'and',
+    withWord: 'weds',
     closing: 'on Sunday, the twentieth of December, two thousand twenty-six (1202 Dhanu 5),\nduring the sacred Muhurtham between 10:45 AM and 11:30 AM,\nat the East Nada Kalyana Mandapam, Sree Krishna Temple, Guruvayoor.',
   },
   story: {
@@ -66,11 +62,11 @@ export const defaultConfig: SiteConfig = {
     eyebrow: 'Blessed at Bhooloka Vaikuntam',
     title: 'Under the lamps of *Guruvayoor*',
     paragraphs: [
-      'Arjun and Meera first crossed paths during a crisp Ekadashi dawn at the East Nada of Guruvayoor Sri Krishna Temple, where thousands of oil lamps on the Vilakkumadam glowed against the morning mist and the melody of Sopana Sangeetham filled the courtyard.',
+      'Arjun and Meera first crossed paths during a sacred Ekadashi dawn at the East Nada of Guruvayoor Sri Krishna Temple, where thousands of oil lamps on the Vilakkumadam glowed against the morning mist and the melody of Sopana Sangeetham filled the courtyard.',
       'Bound by shared devotion, family traditions, and the fragrance of thulasi and mullappoo, they return to the threshold of Lord Guruvayurappan’s Sreekovil to exchange tulsi garlands and tie the sacred thali before the eternal flame of the Nilavilakku.',
     ],
     quote: 'Where the flute of Guruvayurappan plays and the thousand lamps of the Vilakkumadam shine, two hearts find their eternal home.',
-    quoteBy: 'Sacred Temple Blessing',
+    quoteBy: 'Sacred Guruvayoor Blessing',
     image: pStory,
     imageAlt: 'Arjun in a traditional kasavu mundu and Meera in a silk half-saree holding a sacred lotus',
   },
@@ -116,17 +112,16 @@ export const defaultConfig: SiteConfig = {
     lede: 'Two families united in devotion and love before Lord Guruvayurappan.',
   },
   gallery: {
-    eyebrow: 'Sacred Moments',
-    title: 'Guruvayoor *Mandapam*',
-    lede: 'Golden Kodimaram, Deepastambham lamplight, thulasi garlands and kasavu — glimpses from our sacred journey.',
+    eyebrow: 'Sacred Darshan & Moments',
+    title: 'Guruvayoor *Sannidhi*',
+    lede: 'Sreekovil copper roofs, the golden Swarna Kodimaram, Deepastambham lamplight, and sacred thulasi garlands.',
     photos: [
-      { src: gTemple, alt: 'A traditional Kerala temple Sreekovil shrine decorated with garlands and oil lamps', caption: 'The sacred shrine — seeking the blessings of Guruvayurappan', credit: 'dileeshg' },
-      { src: gKodimaram, alt: 'The golden temple flagstaff (Swarna Kodimaram) rising towards the sky', caption: 'Swarna Kodimaram — before the sacred temple flagstaff', credit: 'vathikulam' },
-      { src: gLampJasmine, alt: 'Traditional brass nilavilakku lamps adorned with fresh mullappoo jasmine garlands', caption: 'Nilavilakku & mullappoo at the East Nada Mandapam', credit: 'viditgoswami' },
-      { src: gWalk, alt: 'A Kerala bride in silk and a groom in kasavu mundu wearing sacred tulsi garlands walking hand in hand', caption: 'Pradakshinam around the Chuttambalam after the Thalikettu', credit: 'arununnikrishnan' },
-      { src: gKasavu, alt: 'Bridesmaids draped in traditional Kerala kasavu sarees', caption: 'Draped in handwoven kasavu and temple gold', credit: 'pranavck' },
-      { src: gFamily, alt: 'The couple surrounded by family in traditional Kerala temple attire', caption: 'Blessed by elders and both families at the Nada', credit: 'shades_by_43' },
-      { src: gSitting, alt: 'The couple in traditional Kerala mundu and silk attire', caption: 'In the serenity of God’s Own Country', credit: 'arununnikrishnan' },
+      { src: guruvayoorTopview, alt: 'Guruvayoor Sri Krishna Temple Sreekovil copper roof and golden Swarna Kodimaram flagstaff', caption: 'Sree Guruvayurappan Sreekovil & Swarna Kodimaram', credit: 'Wikimedia Commons' },
+      { src: guruvayoorEastnada, alt: 'East Nada Gopuram and copper-roofed Nalambalam of Guruvayoor Sri Krishna Temple', caption: 'East Nada Gopuram — Guruvayoor Sri Krishna Temple', credit: 'Wikimedia Commons' },
+      { src: guruvayoorSreekovil, alt: 'Guruvayoor Temple illuminated at night with Sudarshana Chakra lights reflecting in Rudratheertham pond', caption: 'Deeparadhana lights reflecting in Rudratheertham Pond', credit: 'Wikimedia Commons' },
+      { src: gFamily, alt: 'Tying the sacred thali at the Guruvayoor East Nada Kalyana Mandapam surrounded by family', caption: 'Mangalya Dharanam — tying the sacred thali at the Mandapam', credit: 'shades_by_43' },
+      { src: gWalk, alt: 'Bride and groom in traditional Kerala kasavu and silk with sacred thulasi garlands', caption: 'Pradakshinam in fragrant thulasi garlands after the Muhurtham', credit: 'arununnikrishnan' },
+      { src: guruvayoorKrishnanattam, alt: 'Traditional Krishnanattam performance before a lit brass Nilavilakku at Guruvayoor Temple', caption: 'Sacred Krishnanattam offering before the temple Nilavilakku', credit: 'Wikimedia Commons' },
     ],
   },
   events: {
@@ -154,7 +149,7 @@ export const defaultConfig: SiteConfig = {
         id: 'reception',
         title: 'Sweekaranam & Temple Sadya',
         titleMl: 'സ്വീകരണം · വിവാഹസദ്യ',
-        image: pReception,
+        image: gLampJasmine,
         host: 'Hosted by both families at Guruvayoor',
         intro: 'Following Darshan and Pradakshinam at the temple courtyard, please join us steps away from East Nada to bless the newlyweds over a traditional 24-course Kerala wedding sadya served on banana leaf with Palada Pradhaman.',
         start: '2026-12-20T12:00:00+05:30',

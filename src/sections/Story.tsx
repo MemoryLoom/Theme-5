@@ -2,21 +2,32 @@ import { ImageReveal, Parallax, Reveal, RevealItem, Seam, TextReveal } from '../
 import { MediaImg } from '../components/ui/MediaImg'
 import { MayilpeeliFlute, MuralCorner, TempleBell } from '../components/decor/Kerala'
 import { useSite } from '../context/SiteContext'
+import floralCorner from '../assets/photos/floral-corner.webp'
+import templeBorder from '../assets/photos/temple-zari-border.webp'
 
-/** Couple introduction framed as a Guruvayoor temple mandapam arch with hanging brass bells. */
+/** Couple introduction framed as a Guruvayoor temple mandapam arch with hanging brass bells and swaying floral garlands. */
 export function Story() {
   const { config } = useSite()
   const s = config.story
   if (!s.enabled) return null
   return (
-    <section className="section tone-sandal weave" id="story" aria-label="Our story">
+    <section className="section tone-sandal weave overflow-hidden" id="story" aria-label="Our story">
+      <img src={templeBorder} alt="" className="temple-zari-border temple-zari-border--top" />
       <Seam />
-      <div className="section-inner grid items-center gap-14 text-left lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
+
+      <span className="sway-corner sway-corner--tl opacity-85" aria-hidden="true">
+        <img src={floralCorner} alt="" decoding="async" />
+      </span>
+      <span className="sway-corner sway-corner--tr opacity-85" aria-hidden="true">
+        <img src={floralCorner} alt="" decoding="async" style={{ animationDelay: '-1.6s' }} />
+      </span>
+
+      <div className="section-inner relative z-10 grid items-center gap-14 text-left lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
         {s.image && (
           <div className="relative mx-auto w-full max-w-[440px]">
             {/* Hanging brass temple bells flanking the arch */}
-            <TempleBell className="pointer-events-none absolute -left-5 -top-4 z-10 h-20 w-9 text-gold opacity-85" />
-            <TempleBell className="pointer-events-none absolute -right-5 -top-4 z-10 h-20 w-9 text-gold opacity-85" />
+            <TempleBell className="pointer-events-none absolute -left-4 -top-4 z-10 h-20 w-9 text-gold opacity-85 sm:-left-5" />
+            <TempleBell className="pointer-events-none absolute -right-4 -top-4 z-10 h-20 w-9 text-gold opacity-85 sm:-right-5" />
             <Parallax distance={40}>
               <ImageReveal className="aspect-[4/5] !rounded-[200px_200px_20px_20px]" from="bottom">
                 <MediaImg src={s.image} alt={s.imageAlt || ''} className="h-full w-full object-cover" />
@@ -43,6 +54,7 @@ export function Story() {
           )}
         </div>
       </div>
+      <img src={templeBorder} alt="" className="temple-zari-border temple-zari-border--bottom" />
     </section>
   )
 }

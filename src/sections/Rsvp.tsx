@@ -4,8 +4,11 @@ import type { Rsvp as RsvpRec } from '../config/types'
 import { IBed, ICheck } from '../components/ui/Icons'
 import { Reveal, SectionHeading, Seam } from '../components/ui/Reveal'
 import { JasmineStrand } from '../components/decor/Kerala'
+import { SectionFlowerRain } from '../components/ui/RollingScroll'
 import { useSite } from '../context/SiteContext'
 import { dayLabel, shortDate } from '../lib/date'
+import floralCorner from '../assets/photos/floral-corner.webp'
+import templeBorder from '../assets/photos/temple-zari-border.webp'
 
 type Errors = Partial<Record<'name' | 'events' | 'rooms' | 'dates' | 'form', string>>
 
@@ -146,9 +149,17 @@ export function Rsvp() {
 
   let step = 1
   return (
-    <section className="section tone-light weave" id="rsvp" aria-label="RSVP">
+    <section className="section tone-light weave overflow-hidden" id="rsvp" aria-label="RSVP">
+      <img src={templeBorder} alt="" className="temple-zari-border temple-zari-border--top" />
       <Seam />
-      <div className="section-inner">
+      <div className="sticky-frame-layer" aria-hidden="true">
+        <div className="sticky-frame-box">
+          <span className="sway-corner sway-corner--tl"><img src={floralCorner} alt="" decoding="async" /></span>
+          <span className="sway-corner sway-corner--tr"><img src={floralCorner} alt="" decoding="async" style={{ animationDelay: '-1.5s' }} /></span>
+          {mode === 'done' && <SectionFlowerRain />}
+        </div>
+      </div>
+      <div className="section-inner relative z-10">
         <SectionHeading eyebrow="RSVP" title={c.title} lede={c.copy} />
         {guestName && mode === 'form' && <Reveal><p className="serif -mt-8 mb-10 text-[21px] italic text-gold2">We hope to see you, {guestName}.</p></Reveal>}
 
@@ -254,6 +265,7 @@ export function Rsvp() {
           )}
         </AnimatePresence>
       </div>
+      <img src={templeBorder} alt="" className="temple-zari-border temple-zari-border--bottom" />
     </section>
   )
 }

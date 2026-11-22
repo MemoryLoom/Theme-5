@@ -1,9 +1,11 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { memo, useEffect, useState } from 'react'
 import { Backdrop, Parallax, Reveal, RevealItem, Seam, TextReveal } from '../components/ui/Reveal'
-import { Deepastambham, VilakkumadamRow } from '../components/decor/Kerala'
+import { Deepastambham, Nilavilakku, VilakkumadamRow } from '../components/decor/Kerala'
 import { useSite } from '../context/SiteContext'
 import { dateParts, diffParts, longDate, tzOf } from '../lib/date'
+import templeBorder from '../assets/photos/temple-zari-border.webp'
+import templeGround from '../assets/photos/temple-ground.webp'
 
 /** One animated number: digits slide when they change. */
 const Digit = memo(function Digit({ value }: { value: string }) {
@@ -31,6 +33,15 @@ function useNow(interval = 1000) {
   return now
 }
 
+// Floating & swaying hanging temple lamps (adapted from lovewed SaveTheDate section)
+const FLOATING_LAMPS = [
+  { left: '8%', k: 0.85, amp: '3.2deg', dur: '4.8s', delay: '-1.2s' },
+  { left: '22%', k: 0.68, amp: '2.6deg', dur: '5.5s', delay: '-3.1s' },
+  { left: '50%', k: 1.05, amp: '2.2deg', dur: '6.1s', delay: '-0.8s' },
+  { left: '78%', k: 0.72, amp: '3.0deg', dur: '5.2s', delay: '-2.4s' },
+  { left: '92%', k: 0.88, amp: '3.5deg', dur: '4.6s', delay: '-4.0s' },
+]
+
 export function DateCountdown() {
   const { config } = useSite()
   const w = config.wedding
@@ -48,11 +59,28 @@ export function DateCountdown() {
   const month = new Date(w.start).toLocaleDateString('en-GB', { month: 'long', timeZone: tz })
 
   return (
-    <section id="date" className="section tone-maroon overflow-hidden" aria-label="Wedding date and countdown">
-      <Backdrop src={config.backdrops.countdown} distance={80} />
+    <section id="date" className="section tone-maroon overflow-hidden !pb-0" aria-label="Wedding date and countdown">
+      <img src={templeBorder} alt="" className="temple-zari-border temple-zari-border--top" />
+      <Backdrop src={config.backdrops.countdown} distance={80} opacity={0.5} />
       <Seam />
+
+      {/* Floating & gently swaying Guruvayoor temple lamps across the top */}
+      <div className="pointer-events-none absolute inset-x-0 top-4 z-0 h-44 overflow-hidden" aria-hidden="true">
+        {FLOATING_LAMPS.map((l, i) => (
+          <div
+            key={i}
+            className="floating-lamp"
+            style={{ '--l': l.left, '--k': l.k, '--amp': l.amp, '--d': l.dur, '--delay': l.delay } as React.CSSProperties}
+          >
+            <span className="floating-lamp__glow" />
+            <div className="mx-auto h-10 w-[1.5px] bg-kasavu/60" />
+            <Nilavilakku className="h-16 w-10 text-kasavu" flames={3} />
+          </div>
+        ))}
+      </div>
+
       {/* Sacred Sudarshana / Lotus Mandala rings behind the Muhurtham date */}
-      <Parallax className="pointer-events-none absolute left-1/2 top-[6%] -z-10 -translate-x-1/2" distance={70}>
+      <Parallax className="pointer-events-none absolute left-1/2 top-[8%] -z-10 -translate-x-1/2" distance={70}>
         <svg width="560" height="560" viewBox="0 0 560 560" fill="none" className="h-[min(560px,120vw)] w-[min(560px,120vw)] text-gold" aria-hidden="true">
           <circle cx="280" cy="280" r="276" stroke="currentColor" strokeOpacity=".15" />
           <circle cx="280" cy="280" r="220" stroke="currentColor" strokeOpacity=".12" strokeDasharray="3 8" />
@@ -61,14 +89,14 @@ export function DateCountdown() {
       </Parallax>
 
       {/* Flanking Guruvayoor Deepastambham lamp towers */}
-      <div className="pointer-events-none absolute bottom-10 left-[5vw] hidden text-kasavu/50 lg:block" aria-hidden="true">
+      <div className="pointer-events-none absolute bottom-20 left-[5vw] hidden text-kasavu/50 lg:block" aria-hidden="true">
         <Deepastambham className="h-[220px] w-[100px]" />
       </div>
-      <div className="pointer-events-none absolute bottom-10 right-[5vw] hidden text-kasavu/50 lg:block" aria-hidden="true">
+      <div className="pointer-events-none absolute bottom-20 right-[5vw] hidden text-kasavu/50 lg:block" aria-hidden="true">
         <Deepastambham className="h-[220px] w-[100px]" />
       </div>
 
-      <div className="section-inner max-w-[860px]">
+      <div className="section-inner relative z-10 max-w-[860px]">
         <TextReveal as="p" text={w.auspiciousMl} className="ml mb-3 text-[clamp(22px,4.2vw,34px)] !font-semibold text-kasavu" />
         <Reveal distance={14}><div className="eyebrow">{w.dateBarText}</div></Reveal>
         <div className="flex items-end justify-center gap-[clamp(14px,4vw,36px)]" aria-label={longDate(w.start)}>
@@ -110,6 +138,11 @@ export function DateCountdown() {
             </Reveal>
           )}
         </div>
+      </div>
+
+      {/* Temple courtyard lamps & steps at the base of the countdown section */}
+      <div className="pointer-events-none relative z-10 mt-12 w-full">
+        <img src={templeGround} alt="" className="mx-auto block w-full max-w-[1280px] object-cover opacity-95" loading="lazy" decoding="async" />
       </div>
     </section>
   )

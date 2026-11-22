@@ -320,8 +320,316 @@ input[type='range'] { accent-color: var(--gold); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .eq i, .scroll-cue i, .btn-primary::after, .flicker { animation: none !important; }
-  .btn-primary::after { display: none; }
+  .eq i, .scroll-cue i, .btn-primary::after, .flicker, .temple-flower-rain__drop, .sway-corner img, .floating-lamp { animation: none !important; }
+  .btn-primary::after, .temple-flower-rain { display: none; }
   .btn:hover, .card.hoverable:hover { transform: none; }
+  .rolling-scroll__content, .invite-cascade__line { opacity: 1 !important; transform: none !important; }
+}
+
+/* ───────── lovewed-inspired RollingScroll (unrolling royal temple scroll) ───────── */
+.rolling-scroll {
+  --paper-w: 91%;
+  --paper-pad-y: clamp(28px, 7%, 52px);
+  --paper-pad-x: clamp(20px, 8.5%, 56px);
+  --roller-overlap: 48%;
+  --roller-space: clamp(1.8rem, 4vw, 2.8rem);
+  width: min(100%, 660px);
+  padding: var(--roller-space) 0;
+  overflow-anchor: none;
+  margin: 0 auto;
+}
+.rolling-scroll__body { position: relative; }
+.rolling-scroll__roller {
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 14px rgba(18, 6, 4, .55));
+  width: 100%;
+  height: auto;
+  display: block;
+  position: absolute;
+  left: 0;
+}
+.rolling-scroll__roller--top {
+  top: 0;
+  transform: translateY(calc(var(--roller-overlap) - 100%));
+}
+.rolling-scroll__roller--bottom {
+  bottom: 0;
+  transform: translateY(calc(100% - var(--roller-overlap)));
+}
+.rolling-scroll__clip {
+  height: 0;
+  width: var(--paper-w);
+  margin: 0 auto;
+  overflow: hidden;
+  will-change: height;
+}
+.rolling-scroll__paper {
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--paper-pad-y) var(--paper-pad-x);
+  background: var(--paper-img) center / 100% 100% no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.rolling-scroll__content {
+  width: 100%;
+  opacity: clamp(0, calc((var(--p, 1) - 0.25) * 1.65), 1);
+  transition: opacity 0.25s ease-out;
+}
+@media (max-width: 520px) {
+  .rolling-scroll {
+    --paper-w: 93%;
+    --paper-pad-x: 8%;
+    --paper-pad-y: 9%;
+    --roller-space: 1.35rem;
+  }
+}
+
+/* ───────── Sticky Viewport Frame & Swaying Temple Floral Corners ───────── */
+.temple-zari-border {
+  pointer-events: none;
+  width: 100%;
+  height: clamp(18px, 3.2vw, 32px);
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  left: 0;
+  z-index: 4;
+}
+.temple-zari-border--top { top: 0; }
+.temple-zari-border--bottom { bottom: 0; transform: scaleY(-1); }
+
+.sticky-frame-layer {
+  z-index: 3;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+}
+.sticky-frame-box {
+  height: min(100svh, 100%);
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+.sway-corner {
+  position: absolute;
+  width: clamp(95px, 23vw, 250px);
+  pointer-events: none;
+  z-index: 3;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .35));
+}
+.sway-corner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform-origin: 0 0;
+  animation: templeSway 5.8s ease-in-out infinite alternate;
+}
+.sway-corner--tl { top: 0; left: 0; }
+.sway-corner--tr { top: 0; right: 0; transform: scaleX(-1); }
+.sway-corner--bl { bottom: 0; left: 0; transform: scaleY(-1); }
+.sway-corner--br { bottom: 0; right: 0; transform: scale(-1, -1); }
+@keyframes templeSway {
+  0% { transform: rotate(-1.8deg) scale(1); }
+  100% { transform: rotate(2.2deg) scale(1.03); }
+}
+
+/* ───────── Falling Temple Flowers (Marigold & Lotus/Dahlia) ───────── */
+.temple-flower-rain {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+  z-index: 3;
+}
+.temple-flower-rain__drop {
+  position: absolute;
+  top: -10vh;
+  left: var(--l);
+  width: var(--s);
+  height: auto;
+  opacity: 0.88;
+  will-change: transform;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .35));
+  animation: templePetalFall var(--d) linear infinite;
+  animation-delay: var(--delay);
+}
+.temple-flower-rain.is-paused .temple-flower-rain__drop {
+  animation-play-state: paused;
+}
+@keyframes templePetalFall {
+  0% { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.85; }
+  100% { transform: translate3d(var(--dx), 112vh, 0) rotate(var(--rot)); opacity: 0; }
+}
+@media (max-width: 640px) {
+  .temple-flower-rain__drop:nth-child(n+8) { display: none; }
+}
+
+/* ───────── Hero Doors-Open & Foreground Floral Scroll Parallax ───────── */
+@keyframes heroDoorsOpen {
+  0% { clip-path: inset(-20% 50%); opacity: 0; filter: blur(6px); transform: scale(1.12); }
+  60% { opacity: 1; }
+  100% { clip-path: inset(-20% -5%); opacity: 1; filter: blur(0); transform: none; }
+}
+.hero-doors-open {
+  animation: 1.75s cubic-bezier(.75, 0, .2, 1) both heroDoorsOpen;
+}
+.hero-bottom-garland {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  max-height: clamp(120px, 23vh, 240px);
+  object-fit: cover;
+  object-position: center bottom;
+  transform-origin: bottom center;
+  transform: translateY(calc(var(--o, 0) * 0.28px)) scale(calc(1 + var(--o, 0) * 0.00008));
+  will-change: transform;
+  opacity: 0.92;
+}
+
+/* ───────── Invitation Staggered Scroll Cascade & Rising Temple Ground ───────── */
+.invite-cascade__line {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.85s cubic-bezier(.22, .8, .24, 1), transform 0.85s cubic-bezier(.22, .8, .24, 1);
+  transition-delay: calc(var(--i, 0) * 0.11s);
+}
+.invite-cascade.is-in .invite-cascade__line {
+  opacity: 1;
+  transform: none;
+}
+.invite-ground-wrap {
+  pointer-events: none;
+  width: 100%;
+  margin-top: clamp(-36px, -4vw, -16px);
+  transform: translateY(calc(var(--o, 0) * 0.18px));
+  will-change: transform;
+  position: relative;
+  z-index: 3;
+}
+
+/* ───────── Floating & Swaying Temple Lamps (DateCountdown) ───────── */
+.floating-lamp {
+  position: absolute;
+  top: 0;
+  left: var(--l);
+  transform-origin: 50% 0;
+  animation: lampFloatSway var(--d, 5s) ease-in-out infinite alternate;
+  animation-delay: var(--delay, 0s);
+  pointer-events: none;
+}
+.floating-lamp__glow {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  width: 110px;
+  height: 110px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 210, 110, .42) 0%, rgba(255, 180, 70, .14) 45%, transparent 72%);
+}
+@keyframes lampFloatSway {
+  0% { transform: rotate(calc(var(--amp, 3deg) * -1)) scale(var(--k, 0.85)); }
+  100% { transform: rotate(var(--amp, 3deg)) scale(var(--k, 0.85)); }
+}
+
+/* ───────── Royal Temple Arch & Gold Frame Gallery Grid ───────── */
+.temple-gal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.8vw, 2rem);
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1040px;
+}
+@media (min-width: 768px) {
+  .temple-gal-grid > li:nth-child(3n+2) {
+    margin-top: 2.4rem;
+  }
+}
+@media (max-width: 767px) {
+  .temple-gal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+}
+.temple-gal-frame {
+  --r: 14px;
+  border: 1px solid rgba(201, 162, 83, 0.78);
+  border-radius: var(--r);
+  background: rgba(43, 27, 18, 0.88);
+  cursor: zoom-in;
+  width: 100%;
+  padding: 9px;
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), border-color 0.5s var(--ease);
+  display: block;
+  position: relative;
+  box-shadow: 0 18px 38px -12px rgba(20, 10, 5, 0.72);
+  text-align: left;
+}
+.temple-gal-frame--arch {
+  --r: 999px 999px 14px 14px;
+}
+.temple-gal-frame::before {
+  content: '';
+  border: 1px solid rgba(244, 213, 138, 0.34);
+  border-radius: var(--r);
+  pointer-events: none;
+  z-index: 2;
+  position: absolute;
+  inset: 4px;
+}
+.temple-gal-frame::after {
+  content: '';
+  background: var(--p-gold);
+  width: 10px;
+  height: 10px;
+  box-shadow: 0 0 12px rgba(244, 213, 138, 0.9);
+  z-index: 3;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+.temple-gal-frame:hover, .temple-gal-frame:focus-visible {
+  border-color: #f4d58a;
+  box-shadow: 0 24px 48px -12px rgba(20, 10, 5, 0.88), 0 0 26px rgba(201, 162, 83, 0.32);
+  transform: translateY(-7px);
+}
+.temple-gal-pic {
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+  position: relative;
+}
+.temple-gal-frame--arch .temple-gal-pic {
+  border-radius: 999px 999px 8px 8px;
+}
+.temple-gal-pic img {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.95s cubic-bezier(.2, .7, .2, 1);
+}
+.temple-gal-frame:hover .temple-gal-pic img {
+  transform: scale(1.07);
+}
+@media (max-width: 640px) {
+  .temple-gal-frame { padding: 6px; }
+  .temple-gal-frame::before { inset: 3px; }
 }
 }
