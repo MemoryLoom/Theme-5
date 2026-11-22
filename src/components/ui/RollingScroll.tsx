@@ -1,34 +1,36 @@
 import { useEffect, useRef, type ReactNode } from 'react'
 import rollerCrimson from '../../assets/photos/scroll-roller.webp'
 import paperCrimson from '../../assets/photos/scroll-paper.webp'
-import rollerGold from '../../assets/photos/scroll-roller-gold.webp'
 import paperIvory from '../../assets/photos/scroll-paper-ivory.webp'
 import flowerMarigold from '../../assets/photos/flower-marigold.webp'
 import flowerJasmine from '../../assets/photos/flower-jasmine.webp'
 
 /**
  * Scroll-driven unrolling royal temple scroll (adapted from lovewed.in/aaravwedsaadhya RollingScroll).
- * As the section enters the viewport, the top and bottom ornate temple rollers smoothly unroll the
- * sacred parchment using requestAnimationFrame interpolation (`o += (target - o) * 0.18`).
+ * Tuned so the parchment begins unrolling as soon as it enters the viewport and completes
+ * smoothly by the time the scroll reaches the middle of the screen (or bottom of the page).
  */
 export function RollingScroll({
   children,
   variant = 'ivory',
-  startAt = 0.88,
-  distance = 0.62,
+  startAt = 0.94,
+  distance = 0.42,
+  onProgress,
   className = '',
 }: {
   children: ReactNode
   variant?: 'ivory' | 'crimson'
   startAt?: number
   distance?: number
+  onProgress?: (p: number) => void
   className?: string
 }) {
   const rootRef = useRef<HTMLDivElement>(null)
   const clipRef = useRef<HTMLDivElement>(null)
   const paperRef = useRef<HTMLDivElement>(null)
 
-  const rollerSrc = variant === 'crimson' ? rollerCrimson : rollerGold
+  // Use the tightly-cropped royal gold & crimson roller so top/bottom overlap is exact
+  const rollerSrc = rollerCrimson
   const paperSrc = variant === 'crimson' ? paperCrimson : paperIvory
 
   useEffect(() => {
@@ -44,21 +46,27 @@ export function RollingScroll({
 
     const calcTarget = () => {
       const vh = window.innerHeight
-      const span = Math.min(vh * distance, Math.max(260, 0.65 * fullHeight))
+      // If user has scrolled near the very bottom of the page, ensure footer/lower scrolls open completely
+      const nearBottom = vh + window.scrollY >= document.documentElement.scrollHeight - 48
+      if (nearBottom && root.getBoundingClientRect().top < vh * 0.85) {
+        return 1
+      }
+      const span = Math.min(vh * distance, Math.max(180, 0.45 * fullHeight))
       const raw = (vh * startAt - root.getBoundingClientRect().top) / span
-      return Math.min(Math.max(raw, 0.08), 1)
+      return Math.min(Math.max(raw, 0.14), 1)
     }
 
     const apply = () => {
       root.style.setProperty('--p', currentP.toFixed(4))
-      clip.style.height = currentP >= 0.998 ? 'auto' : `${Math.round(fullHeight * currentP)}px`
+      clip.style.height = currentP >= 0.995 ? 'auto' : `${Math.round(fullHeight * currentP)}px`
+      onProgress?.(currentP)
     }
 
     const tick = () => {
       rafId = 0
       const target = calcTarget()
-      currentP += (target - currentP) * 0.2
-      if (Math.abs(target - currentP) < 0.0015) currentP = target
+      currentP += (target - currentP) * 0.28
+      if (Math.abs(target - currentP) < 0.002) currentP = target
       apply()
       if (currentP !== target) {
         rafId = requestAnimationFrame(tick)
@@ -92,7 +100,7 @@ export function RollingScroll({
       window.removeEventListener('resize', schedule)
       if (rafId) cancelAnimationFrame(rafId)
     }
-  }, [startAt, distance])
+  }, [startAt, distance, onProgress])
 
   return (
     <div
@@ -113,9 +121,6 @@ export function RollingScroll({
   )
 }
 
-/**
- * Deterministic PRNG for falling temple marigold & jasmine flowers so SSR/hydration and re-renders remain stable.
- */
 function makeDrops(count: number, seed = 7) {
   let s = seed
   const rand = () => {
@@ -126,21 +131,17 @@ function makeDrops(count: number, seed = 7) {
   const sources = [flowerMarigold, flowerJasmine]
   return Array.from({ length: count }, (_, idx) => ({
     src: sources[idx % sources.length],
-    left: 3 + rand() * 92,
-    size: 18 + rand() * 16,
-    dur: 9 + rand() * 8,
-    delay: -(rand() * 16),
-    dx: (rand() - 0.5) * 22,
-    rot: (rand() < 0.5 ? -1 : 1) * (180 + rand() * 520),
+    left: 4 + rand() * 90,
+    size: 16 + rand() * 14,
+    dur: 10 + rand() * 7,
+    delay: -(rand() * 15),
+    dx: (rand() - 0.5) * 20,
+    rot: (rand() < 0.5 ? -1 : 1) * (180 + rand() * 480),
   }))
 }
 
-const DROPS = makeDrops(14)
+const DROPS = makeDrops(12)
 
-/**
- * Falling temple flowers (marigold & crimson lotus/dahlia) inside a section's sticky viewport box.
- * Automatically pauses when the section is offscreen and reduces count on mobile screens.
- */
 export function SectionFlowerRain({ paused = false }: { paused?: boolean }) {
   return (
     <div className={`temple-flower-rain ${paused ? 'is-paused' : ''}`} aria-hidden="true">

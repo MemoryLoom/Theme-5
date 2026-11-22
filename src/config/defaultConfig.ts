@@ -19,7 +19,7 @@ import guruvayoorSreekovil from '../assets/photos/guruvayoor-sreekovil.jpg'
 import guruvayoorKrishnanattam from '../assets/photos/guruvayoor-krishnanattam.jpg'
 
 /** Bump when the template's content model changes; older saved configs are then ignored. */
-export const CONFIG_VERSION = 7
+export const CONFIG_VERSION = 8
 
 /**
  * GURUVAYOOR SRI KRISHNA TEMPLE WEDDING THEME — authentic Guruvayoor temple imagery,
@@ -41,14 +41,14 @@ export const defaultConfig: SiteConfig = {
     footer: bgFooter,
   },
   hero: {
-    eyebrow: 'Sree Guruvayurappan Thuna · The Wedding Of',
+    eyebrow: 'The Wedding Of',
     blessingMl: 'ഓം നമോ ഭഗവതേ വാസുദേവായ · ശ്രീ ഗുരുവായൂരപ്പൻ തുണ',
     tagline: 'Before the sacred Deepastambham and golden Kodimaram of Bhooloka Vaikuntam, two souls unite as one.',
     venueLine: 'Sree Guruvayurappan Temple · East Nada, Guruvayoor',
     image: bgHero,
   },
   invitation: {
-    eyebrow: 'Thirumangalya Kshanam · Sacred Scroll',
+    eyebrow: 'Sacred Invitation',
     inviteMl: 'ഗുരുവായൂരപ്പന്റെ തിരുസന്നിധിയിലേക്ക് സ്നേഹപൂർവ്വം ക്ഷണിക്കുന്നു',
     lead: 'With the divine grace of Lord Sree Guruvayurappan and the blessings of our revered elders,',
     hosts: ['Mr. Rajesh Nair & Mrs. Lakshmi Nair', 'Mr. Suresh Menon & Mrs. Anitha Menon'],
@@ -59,7 +59,7 @@ export const defaultConfig: SiteConfig = {
   },
   story: {
     enabled: true,
-    eyebrow: 'Blessed at Bhooloka Vaikuntam',
+    eyebrow: 'Our Sacred Journey',
     title: 'Under the lamps of *Guruvayoor*',
     paragraphs: [
       'Arjun and Meera first crossed paths during a sacred Ekadashi dawn at the East Nada of Guruvayoor Sri Krishna Temple, where thousands of oil lamps on the Vilakkumadam glowed against the morning mist and the melody of Sopana Sangeetham filled the courtyard.',
@@ -99,7 +99,7 @@ export const defaultConfig: SiteConfig = {
   },
   wedding: {
     start: '2026-12-20T10:45:00+05:30',
-    dateBarText: 'Sunday · 20 December 2026 · 1202 Dhanu 5',
+    dateBarText: 'Sunday · 20 December 2026',
     auspiciousMl: 'ശ്രീ ഗുരുവായൂരപ്പൻ തുണ · ശുഭ മുഹൂർത്തം',
     countdownHeading: 'Counting down to the Guruvayoor Muhurtham',
     todayMessage: 'Today is the sacred Muhurtham at Guruvayoor ✦',
@@ -112,7 +112,7 @@ export const defaultConfig: SiteConfig = {
     lede: 'Two families united in devotion and love before Lord Guruvayurappan.',
   },
   gallery: {
-    eyebrow: 'Sacred Darshan & Moments',
+    eyebrow: 'Sacred Moments',
     title: 'Guruvayoor *Sannidhi*',
     lede: 'Sreekovil copper roofs, the golden Swarna Kodimaram, Deepastambham lamplight, and sacred thulasi garlands.',
     photos: [
@@ -125,7 +125,7 @@ export const defaultConfig: SiteConfig = {
     ],
   },
   events: {
-    eyebrow: 'Sacred Rites at Bhooloka Vaikuntam',
+    eyebrow: 'Sacred Rites',
     title: 'Guruvayoor *Ceremonies*',
     lede: 'Join us at the East Nada of Sree Guruvayurappan Temple as the nadaswaram plays and the sacred lamps are lit.',
     items: [

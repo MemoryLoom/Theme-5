@@ -29,54 +29,56 @@ export function Landing({ onOpen, onDone }: { onOpen: () => void; onDone: () => 
     if (!ready || opening) return
     setOpening(true)
     onOpen() // starts music inside the user gesture and reveals the page underneath
-    setTimeout(onDone, reduce ? 300 : 2300)
+    setTimeout(onDone, reduce ? 300 : 2100)
   }
 
   return (
-    <motion.div className="landing" role="button" tabIndex={0} aria-label="Tap to open the Guruvayoor wedding invitation"
+    <motion.div className="landing flex flex-col items-center justify-between px-4 py-6 sm:py-9" role="button" tabIndex={0} aria-label="Tap to open the Guruvayoor wedding invitation"
       onClick={open} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && (e.preventDefault(), open())}
-      exit={{ opacity: 0, scale: 1.05, transition: { duration: 1.05, ease: IO } }}>
+      exit={{ opacity: 0, scale: 1.04, transition: { duration: 0.9, ease: IO } }}>
       {config.backdrops.landing && (
-        <motion.div className="landing-bg" initial={{ scale: 1.1, opacity: 0 }} animate={{ scale: opening && !reduce ? 1.16 : 1, opacity: 1 }} transition={{ duration: opening ? 2.4 : 2.6, ease: OUT }} aria-hidden="true">
+        <motion.div className="landing-bg" initial={{ scale: 1.08, opacity: 0 }} animate={{ scale: opening && !reduce ? 1.14 : 1, opacity: 1 }} transition={{ duration: opening ? 2.1 : 2.3, ease: OUT }} aria-hidden="true">
           <MediaImg src={config.backdrops.landing} alt="" loading="eager" />
         </motion.div>
       )}
 
       {/* Swaying temple floral garlands in top corners */}
-      <span className="sway-corner sway-corner--tl z-[2] opacity-90" aria-hidden="true">
+      <span className="sway-corner sway-corner--tl z-[2] !w-[clamp(64px,15vw,175px)] opacity-85" aria-hidden="true">
         <img src={floralCorner} alt="" decoding="async" />
       </span>
-      <span className="sway-corner sway-corner--tr z-[2] opacity-90" aria-hidden="true">
+      <span className="sway-corner sway-corner--tr z-[2] !w-[clamp(64px,15vw,175px)] opacity-85" aria-hidden="true">
         <img src={floralCorner} alt="" decoding="async" style={{ animationDelay: '-1.5s' }} />
       </span>
 
       {/* Flanking Guruvayoor East Nada Deepastambham lamp pillars */}
       <motion.div className="pointer-events-none absolute bottom-[14vh] left-[4vw] hidden text-kasavu/65 sm:block md:left-[8vw]"
-        initial={{ opacity: 0, y: 20 }} animate={{ opacity: opening ? 0 : 0.85, y: 0 }} transition={{ duration: 1.4, delay: 0.3 }}>
-        <Deepastambham className="h-[220px] w-[100px] md:h-[260px] md:w-[116px]" />
+        initial={{ opacity: 0, y: 20 }} animate={{ opacity: opening ? 0 : 0.85, y: 0 }} transition={{ duration: 1.2, delay: 0.2 }}>
+        <Deepastambham className="h-[210px] w-[96px] md:h-[250px] md:w-[112px]" />
       </motion.div>
       <motion.div className="pointer-events-none absolute bottom-[14vh] right-[4vw] hidden text-kasavu/65 sm:block md:right-[8vw]"
-        initial={{ opacity: 0, y: 20 }} animate={{ opacity: opening ? 0 : 0.85, y: 0 }} transition={{ duration: 1.4, delay: 0.3 }}>
-        <Deepastambham className="h-[220px] w-[100px] md:h-[260px] md:w-[116px]" />
+        initial={{ opacity: 0, y: 20 }} animate={{ opacity: opening ? 0 : 0.85, y: 0 }} transition={{ duration: 1.2, delay: 0.2 }}>
+        <Deepastambham className="h-[210px] w-[96px] md:h-[250px] md:w-[112px]" />
       </motion.div>
 
-      <motion.div className="absolute left-0 right-0 top-[6vh] z-[3] px-4 text-center" initial={{ opacity: 0, y: -10 }} animate={{ opacity: opening ? 0 : 1, y: 0 }} transition={{ duration: 1.1, ease: OUT, delay: opening ? 0 : 0.3 }}>
-        <MayilpeeliFlute className="mx-auto mb-1 h-11 w-28" />
-        <div className="ml-blessing !text-kasavu">{config.hero.blessingMl}</div>
-        <div className="mt-2 text-[10.5px] uppercase tracking-[.38em] text-[#E8D9BD]/90">Sree Guruvayurappan Temple · East Nada</div>
-        <div className="serif mt-1.5 text-[clamp(26px,6vw,36px)] font-light text-[#FFF8E8]">{first.name} <span className="italic text-kasavu">&amp;</span> {second.name}</div>
+      {/* Top blessing block in flex flow so it never overlaps the envelope or corners */}
+      <motion.div className="relative z-[3] mx-auto max-w-[540px] px-10 pt-1 text-center sm:px-16" initial={{ opacity: 0, y: -10 }} animate={{ opacity: opening ? 0 : 1, y: 0 }} transition={{ duration: 0.8, ease: OUT, delay: opening ? 0 : 0.15 }}>
+        <MayilpeeliFlute className="mx-auto mb-1 h-9 w-24 sm:h-11 sm:w-28" />
+        <div className="ml-blessing !text-[clamp(13px,2.2vw,16px)] !text-kasavu">{config.hero.blessingMl}</div>
+        <div className="mt-1.5 text-[10px] uppercase tracking-[.32em] text-[#E8D9BD]/90">Sree Guruvayurappan Temple · East Nada</div>
+        <div className="serif mt-1 text-[clamp(24px,5.4vw,34px)] font-light leading-tight text-[#FFF8E8]">{first.name} <span className="italic text-kasavu">&amp;</span> {second.name}</div>
       </motion.div>
 
-      <motion.div className="envelope z-[3]" initial={{ opacity: 0, y: 40, scale: 0.94 }}
-        animate={opening && !reduce ? { opacity: 1, y: 60, scale: 1.04 } : { opacity: 1, y: 0, scale: 1 }}
-        transition={opening ? { duration: 1.6, ease: IO, delay: 0.5 } : { duration: 1.3, ease: OUT, delay: 0.15 }}>
+      {/* Center envelope */}
+      <motion.div className="envelope z-[3] my-auto" initial={{ opacity: 0, y: 30, scale: 0.94 }}
+        animate={opening && !reduce ? { opacity: 1, y: 44, scale: 1.03 } : { opacity: 1, y: 0, scale: 1 }}
+        transition={opening ? { duration: 1.4, ease: IO, delay: 0.4 } : { duration: 1.1, ease: OUT, delay: 0.1 }}>
         <div className="env-back" />
-        {/* the invitation card that rises out of the envelope */}
+        {/* the invitation card that rises out of the envelope only when opening */}
         <motion.div className="env-card px-3" style={{ zIndex: opening ? 2 : 1 }}
-          animate={opening && !reduce ? { y: '-58%' } : { y: '0%' }} transition={{ duration: 1.25, ease: IO, delay: 0.75 }}>
+          animate={opening && !reduce ? { y: '-48%', opacity: 1 } : { y: '10%', opacity: opening ? 1 : 0 }} transition={{ duration: 1.15, ease: IO, delay: 0.65 }}>
           <div className="ml text-[10.5px] text-maroon">{config.wedding.auspiciousMl}</div>
-          <div className="serif mt-1 text-[clamp(22px,6vw,30px)] font-normal leading-tight text-maroon">{first.name} <i className="text-[#A98243]">&amp;</i> {second.name}</div>
-          <div className="mt-1 text-[10px] tracking-[.26em] text-[#6B5545]">{dp.d} · {dp.m} · 20{dp.y} · GURUVAYOOR</div>
+          <div className="serif mt-1 text-[clamp(22px,5.6vw,29px)] font-normal leading-tight text-maroon">{first.name} <i className="text-[#A98243]">&amp;</i> {second.name}</div>
+          <div className="mt-1 text-[10px] tracking-[.24em] text-[#6B5545]">{dp.d} · {dp.m} · 20{dp.y} · GURUVAYOOR</div>
         </motion.div>
         {/* front pocket of the envelope */}
         <svg className="env-front" viewBox="0 0 142 100" preserveAspectRatio="none" style={{ zIndex: 2 }} aria-hidden="true">
@@ -86,7 +88,7 @@ export function Landing({ onOpen, onDone }: { onOpen: () => void; onDone: () => 
           <path d="M0 0 L71 56 L142 0" fill="none" stroke="#c9b283" strokeWidth=".5" vectorEffect="non-scaling-stroke" />
         </svg>
         <div className="env-kasavu" aria-hidden="true" />
-        <motion.div className="env-flap" animate={opening && !reduce ? { rotateX: 180 } : { rotateX: 0 }} transition={{ duration: 0.95, ease: IO, delay: 0.3 }}
+        <motion.div className="env-flap" animate={opening && !reduce ? { rotateX: 180 } : { rotateX: 0 }} transition={{ duration: 0.85, ease: IO, delay: 0.25 }}
           style={{ zIndex: opening ? 0 : 3, transformPerspective: 900 }}>
           <div className="face" />
         </motion.div>
@@ -97,29 +99,29 @@ export function Landing({ onOpen, onDone }: { onOpen: () => void; onDone: () => 
             </motion.div>
           ) : (
             <>
-              {/* Golden sparkle burst on seal crack (from lovewed envelope reveal) */}
               {!reduce && SPARKS.map((sp, idx) => (
                 <motion.span
                   key={idx}
                   className="pointer-events-none absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f4d58a] shadow-[0_0_8px_#f4d58a]"
                   initial={{ x: 0, y: 0, scale: 1, opacity: 1 }}
                   animate={{ x: sp.dx, y: sp.dy, scale: 0.2, opacity: 0 }}
-                  transition={{ duration: 0.85, ease: 'easeOut' }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
                 />
               ))}
-              <motion.div className="absolute inset-0" animate={{ x: '-60%', y: '40%', rotate: -30, opacity: 0 }} transition={{ duration: 0.8, ease: IO }}><WaxSeal letters={mono} half="left" /></motion.div>
-              <motion.div className="absolute inset-0" animate={{ x: '60%', y: '40%', rotate: 30, opacity: 0 }} transition={{ duration: 0.8, ease: IO }}><WaxSeal letters={mono} half="right" /></motion.div>
+              <motion.div className="absolute inset-0" animate={{ x: '-60%', y: '40%', rotate: -30, opacity: 0 }} transition={{ duration: 0.75, ease: IO }}><WaxSeal letters={mono} half="left" /></motion.div>
+              <motion.div className="absolute inset-0" animate={{ x: '60%', y: '40%', rotate: 30, opacity: 0 }} transition={{ duration: 0.75, ease: IO }}><WaxSeal letters={mono} half="right" /></motion.div>
             </>
           )}
         </div>
       </motion.div>
 
-      <img src={bottomFlower} alt="" aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] max-h-[170px] w-full object-cover object-bottom opacity-80" />
+      <img src={bottomFlower} alt="" aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] max-h-[120px] w-full object-cover object-bottom opacity-55" />
 
-      <motion.div className="tap-hint !bottom-[calc(34px+env(safe-area-inset-bottom))]" animate={{ opacity: opening ? 0 : 1 }} transition={{ duration: 0.4 }}>
-        {guestName && <motion.div className="landing-guest" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.9 }}>Dear {guestName}</motion.div>}
+      {/* Bottom tap prompt in flex flow */}
+      <motion.div className="relative z-[4] pb-[env(safe-area-inset-bottom)] text-center text-[10.5px] uppercase tracking-[.32em] text-kasavu" animate={{ opacity: opening ? 0 : 1 }} transition={{ duration: 0.35 }}>
+        {guestName && <motion.div className="landing-guest !mb-2" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.7 }}>Dear {guestName}</motion.div>}
         {ready ? (
-          <motion.span className="inline-block rounded-full border border-kasavu/45 bg-[#2B1B12]/80 px-5 py-2 backdrop-blur-sm" initial={{ opacity: 0 }} animate={reduce ? { opacity: 1 } : { opacity: [0.65, 1, 0.65] }} transition={reduce ? { duration: 0.6 } : { duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}>
+          <motion.span className="inline-block rounded-full border border-kasavu/45 bg-[#2B1B12]/85 px-5 py-2 backdrop-blur-sm" initial={{ opacity: 0 }} animate={reduce ? { opacity: 1 } : { opacity: [0.65, 1, 0.65] }} transition={reduce ? { duration: 0.5 } : { duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}>
             Tap the seal to enter Guruvayoor Sannidhi
           </motion.span>
         ) : (
