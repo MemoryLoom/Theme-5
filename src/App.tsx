@@ -8,13 +8,9 @@ import { Hero } from './sections/Hero'
 import { Invitation } from './sections/Invitation'
 import { Story } from './sections/Story'
 import { DateCountdown } from './sections/DateCountdown'
-import { Families } from './sections/Families'
 import { Gallery } from './sections/Gallery'
 import { Events } from './sections/Events'
 import { Rsvp } from './sections/Rsvp'
-import { LiveStream } from './sections/LiveStream'
-import { Contact } from './sections/Contact'
-import { Wishes } from './sections/Wishes'
 import { Footer } from './sections/Footer'
 import type { AdminSession } from './lib/store/types'
 
@@ -79,14 +75,10 @@ export default function App() {
         <Hero opened={opened} />
         <Invitation />
         <Story />
-        <Families />
         <DateCountdown />
         <Events />
         <Gallery />
         <Rsvp />
-        <LiveStream />
-        <Wishes isAdmin={!!session} />
-        <Contact />
       </main>
       <Footer />
 

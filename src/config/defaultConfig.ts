@@ -12,7 +12,6 @@ import decoJasmine from '../assets/photos/deco-jasmine.webp'
 import pStory from '../assets/photos/story.webp'
 import pGroom from '../assets/photos/groom.webp'
 import pBride from '../assets/photos/bride.webp'
-import pNischayam from '../assets/photos/ev-nischayam.webp'
 import pThalikettu from '../assets/photos/ev-thalikettu.webp'
 import pReception from '../assets/photos/ev-reception.webp'
 import gWalk from '../assets/photos/g-walk.webp'
@@ -21,13 +20,9 @@ import gKasavu from '../assets/photos/g-kasavu.webp'
 import gFamily from '../assets/photos/g-family.webp'
 import gLampJasmine from '../assets/photos/g-lampjasmine.webp'
 import gTemple from '../assets/photos/g-temple.webp'
-import gJasmine from '../assets/photos/g-jasmine.webp'
-import gSunset from '../assets/photos/g-sunset.webp'
-import gRings from '../assets/photos/g-rings.webp'
-import gKodimaram from '../assets/photos/g-kodimaram.webp'
 
 /** Bump when the template's content model changes; older saved configs are then ignored. */
-export const CONFIG_VERSION = 4
+export const CONFIG_VERSION = 5
 
 /**
  * DEMO COUPLE — every name, phone number and address below is fictional sample content.
@@ -122,41 +117,21 @@ export const defaultConfig: SiteConfig = {
   gallery: {
     eyebrow: 'Moments',
     title: 'Our *gallery*',
-    lede: 'Kasavu, jasmine and lamplight — a few frames from the journey that brought us here.',
+    lede: 'Kasavu, jasmine and lamplight — a few frames from our journey together.',
     photos: [
       { src: gWalk, alt: 'A Kerala bride in red silk and a groom in mundu with tulsi garlands walking hand in hand', caption: 'Hand in hand — the walk after the thali', credit: 'arununnikrishnan' },
       { src: gSitting, alt: 'The couple sitting in a misty meadow, he in a mundu, she in a silk half-saree', caption: 'Misty mornings in Munnar', credit: 'arununnikrishnan' },
       { src: gKasavu, alt: 'Three women in kasavu sarees against a laterite wall', caption: 'The bridesmaids in kasavu', credit: 'pranavck' },
       { src: gLampJasmine, alt: 'Brass lamp stands with long jasmine garlands', caption: 'Brass, jasmine and lamplight for the mandapam', credit: 'viditgoswami' },
-      { src: gFamily, alt: 'The couple embraced by family in traditional Kerala attire', caption: 'Both families, one big embrace at the nischayam', credit: 'shades_by_43' },
+      { src: gFamily, alt: 'The couple embraced by family in traditional Kerala attire', caption: 'Both families, one big embrace', credit: 'shades_by_43' },
       { src: gTemple, alt: 'A Kerala temple shrine with a tiled roof decorated with garlands', caption: 'Where we went to seek blessings', credit: 'dileeshg' },
-      { src: gJasmine, alt: 'Strings of jasmine flowers hanging from a wooden rod', caption: 'Mullappoo — jasmine for the bride', credit: 'mrcato' },
-      { src: gSunset, alt: 'A houseboat silhouetted against a red sunset on the backwaters', caption: 'Sunset on the backwaters', credit: 'aniljose1997' },
-      { src: gKodimaram, alt: 'A brass temple flagstaff (kodimaram) among coconut palms', caption: 'The kodimaram at our family temple', credit: 'vathikulam' },
-      { src: gRings, alt: 'Two gold rings on wood in warm light', caption: 'The rings — exchanged at our nischayam', credit: 'redaquamedia' },
     ],
   },
   events: {
     eyebrow: 'Celebrations',
     title: 'Wedding *ceremonies*',
-    lede: 'From the nischayam to the thalikettu and the sadya, we would love you beside us for every moment.',
+    lede: 'We would be honoured to have your presence and blessings as we celebrate our wedding and reception.',
     items: [
-      {
-        id: 'nischayam',
-        title: 'Engagement',
-        titleMl: 'നിശ്ചയം',
-        image: pNischayam,
-        host: "At the bride's home",
-        intro: 'The formal betrothal in the presence of both families and elders — the fixing of the muhurtham, the exchange of rings and blessings, followed by a family dinner.',
-        start: '2026-12-18T17:00:00+05:30',
-        end: '2026-12-18T20:00:00+05:30',
-        timeText: '5:00 PM to 8:00 PM',
-        subText: 'Attire · Kasavu & mundu welcome',
-        venue: 'The Menon Residence',
-        venueSub: 'Panampilly Nagar, Kochi',
-        address: 'Panampilly Nagar, Kochi, Kerala',
-        rsvpLabel: 'Fri, 18 Dec · 5 – 8 PM · Panampilly Nagar',
-      },
       {
         id: 'thalikettu',
         title: 'Wedding Ceremony',
@@ -172,22 +147,6 @@ export const defaultConfig: SiteConfig = {
         venueSub: 'Kochi, Kerala',
         address: 'Grand Palace Convention Centre, Kochi, Kerala',
         rsvpLabel: 'Sun, 20 Dec · Muhurtham 10:45 AM',
-      },
-      {
-        id: 'sadya',
-        title: 'Wedding Feast',
-        titleMl: 'സദ്യ',
-        art: 'banana-leaf',
-        host: 'Hosted by both families',
-        intro: 'A traditional vegetarian sadya served on banana leaf — over twenty-four dishes from avial, olan and thoran to three kinds of payasam.',
-        start: '2026-12-20T12:15:00+05:30',
-        end: '2026-12-20T15:00:00+05:30',
-        timeText: '12:15 PM to 3:00 PM',
-        subText: 'Served in two pantis (sittings)',
-        venue: 'Sadya Hall, Grand Palace Convention Centre',
-        venueSub: 'Kochi, Kerala',
-        address: 'Grand Palace Convention Centre, Kochi, Kerala',
-        rsvpLabel: 'Sun, 20 Dec · 12:15 PM · Sadya Hall',
       },
       {
         id: 'reception',
@@ -211,54 +170,45 @@ export const defaultConfig: SiteConfig = {
     enabled: true,
     title: 'Will you *join us?*',
     deadline: '2026-12-10',
-    copy: 'Your presence and blessings are the greatest gift we could ask for. Please let us know which ceremonies you will attend so we can welcome you properly — and save you a leaf at the sadya.',
+    copy: 'Your presence and blessings are the greatest gift we could ask for. Please let us know which ceremonies you will attend so we can welcome you properly.',
     maxGuestsPerEvent: 10,
     rooms: {
-      enabled: true,
-      note: 'Travelling to Kochi? We have reserved rooms for our guests at the Grand Palace, steps away from the mandapam.',
+      enabled: false,
+      note: '',
       checkIn: '2026-12-19',
       checkOut: '2026-12-21',
-      details: ['Complimentary Kerala breakfast for all room guests', 'Airport pick-up from Cochin International (COK) on request', 'Rooms are allotted in the order RSVPs are received'],
+      details: [],
       maxRooms: 6,
     },
   },
   live: {
-    enabled: true,
+    enabled: false,
     eyebrow: 'From wherever you are',
     title: 'Watch us *live*',
     url: '',
     platform: 'YouTube Live',
-    caption: 'Can’t make it to Kochi? Join the thalikettu live on Sunday, 20 December 2026 from 10:15 AM IST — we will feel your blessings from across the miles.',
+    caption: '',
     buttonLabel: 'Watch the wedding live',
   },
   contact: {
     eyebrow: 'Questions?',
     title: 'Get in *touch*',
-    note: 'Demo contact details — replace with the family’s real numbers before sharing.',
-    people: [
-      { name: 'Rajesh Nair', role: "Groom's father", phone: '+919000010001', whatsapp: true },
-      { name: 'Suresh Menon', role: "Bride's father", phone: '+919000010002', whatsapp: true },
-      { name: 'Anjali Nair', role: 'Travel & stay', phone: '+919000010003', whatsapp: true },
-    ],
+    note: '',
+    people: [],
     residence: {
       label: 'Wedding venue',
-      address: 'Grand Palace Convention Centre\nMarine Drive, Kochi, Kerala (demo address)',
+      address: 'Grand Palace Convention Centre\nMarine Drive, Kochi, Kerala',
       mapsUrl: '',
     },
   },
   wishes: {
-    enabled: true,
+    enabled: false,
     eyebrow: 'Guestbook',
     title: 'Wishes *wall*',
-    lede: 'Leave a blessing, a memory or a little love for Arjun & Meera.',
+    lede: '',
     placeholder: 'Write your blessings for Arjun & Meera…',
     pageSize: 6,
-    samples: [
-      { name: 'Priya & Rohan', message: 'Watching your love grow from that bookshop café to this day has been the sweetest story. Wishing you a lifetime of shared books, coffee and adventures!', createdAt: '2026-11-18T19:42:00+05:30' },
-      { name: 'Valsala Ammayi', message: 'ഒരായിരം വിവാഹ മംഗളാശംസകൾ! ഗുരുവായൂരപ്പൻ അനുഗ്രഹിക്കട്ടെ. 🙏', createdAt: '2026-11-17T08:10:00+05:30' },
-      { name: 'Uncle Vinod', message: 'Meera mol, you have always lit up every room you walk into. Arjun, take good care of our girl. Blessings to you both.', createdAt: '2026-11-16T09:15:00+05:30' },
-      { name: 'Sneha Thomas', message: 'Two of the kindest people I know, finally making it official! Saving my place at the sadya already — may your home always be full of music and laughter.', createdAt: '2026-11-14T21:03:00+05:30' },
-    ],
+    samples: [],
   },
   music: {
     enabled: true,
@@ -271,13 +221,9 @@ export const defaultConfig: SiteConfig = {
   },
   footer: {
     message: 'With love and gratitude,',
-    creatorName: 'DigiLid',
-    creatorUrl: 'https://marketingdigilid.com',
-    socials: [
-      { kind: 'whatsapp', url: 'https://wa.me/919000010001' },
-      { kind: 'instagram', url: 'https://instagram.com/' },
-      { kind: 'website', url: 'https://marketingdigilid.com' },
-    ],
+    creatorName: '',
+    creatorUrl: '',
+    socials: [],
   },
   theme: {
     brown: '#302018',

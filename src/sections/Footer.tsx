@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Backdrop, Ornament, Reveal, TextReveal } from '../components/ui/Reveal'
 import { Nilavilakku } from '../components/decor/Kerala'
-import { IFacebook, IGlobe, IInstagram, IPause, IPlay, ISettings, IWhatsapp, IYoutube } from '../components/ui/Icons'
+import { IFacebook, IGlobe, IInstagram, IPause, IPlay, IWhatsapp, IYoutube } from '../components/ui/Icons'
 import { useCouple, useSite } from '../context/SiteContext'
 import { useMusic } from '../music/MusicContext'
 import { dateParts } from '../lib/date'
@@ -9,7 +9,7 @@ import { dateParts } from '../lib/date'
 const ICONS = { whatsapp: IWhatsapp, instagram: IInstagram, website: IGlobe, facebook: IFacebook, youtube: IYoutube }
 
 export function Footer() {
-  const { config, setAdminOpen } = useSite()
+  const { config } = useSite()
   const { first, second, mono } = useCouple()
   const m = useMusic()
   const f = config.footer
@@ -37,12 +37,11 @@ export function Footer() {
             {f.socials.map((s) => { const I = ICONS[s.kind] ?? IGlobe; return <a key={s.kind + s.url} className="social" href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.kind}><I /></a> })}
           </div>
         )}
-        <div className="text-[10.5px] uppercase tracking-[.36em] text-muted/60">
-          Invitation crafted by {f.creatorUrl ? <a href={f.creatorUrl} target="_blank" rel="noopener noreferrer" className="text-gold transition hover:text-gold2">{f.creatorName}</a> : f.creatorName}
-        </div>
-        <button onClick={() => setAdminOpen(true)} className="inline-flex items-center gap-2 rounded-full border border-gold/20 px-5 py-2 text-[10px] uppercase tracking-[.3em] text-muted/60 transition hover:border-gold/60 hover:text-gold2">
-          <ISettings width={12} height={12} />Admin
-        </button>
+        {f.creatorName && (
+          <div className="text-[10.5px] uppercase tracking-[.36em] text-muted/60">
+            Invitation crafted by {f.creatorUrl ? <a href={f.creatorUrl} target="_blank" rel="noopener noreferrer" className="text-gold transition hover:text-gold2">{f.creatorName}</a> : f.creatorName}
+          </div>
+        )}
       </Reveal>
     </footer>
   )
